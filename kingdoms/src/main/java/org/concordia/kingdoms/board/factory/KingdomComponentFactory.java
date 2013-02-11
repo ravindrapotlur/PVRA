@@ -8,10 +8,10 @@ import org.concordia.kingdoms.tokens.TileType;
 public class KingdomComponentFactory implements ComponentFactory {
 
 	public Castle createCastle(final Integer rank, Color color) {
-		return new Castle(rank, color);
+		return Castle.newCastle(rank, color);
 	}
 
 	public Tile createTile(TileType type, String name, int value) {
-		return new Tile(type, name, value);
+		return Tile.newTile(type, name, value);
 	}
 }

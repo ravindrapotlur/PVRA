@@ -12,9 +12,9 @@ public class Entry {
 		return this.component;
 	}
 
-	public void setComponent(Component component) throws Exception {
+	public void setComponent(Component component) {
 		if (!isEmpty()) {
-			throw new Exception("Entry is already filled");
+			throw new RuntimeException("Entry is already filled");
 		}
 		this.component = component;
 	}

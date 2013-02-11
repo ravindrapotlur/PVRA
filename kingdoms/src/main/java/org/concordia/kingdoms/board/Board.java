@@ -3,8 +3,10 @@ package org.concordia.kingdoms.board;
 import java.util.List;
 
 import org.concordia.kingdoms.Player;
+import org.concordia.kingdoms.board.factory.CoinBank;
+import org.concordia.kingdoms.board.factory.TileBank;
 import org.concordia.kingdoms.board.ui.Console;
-import org.concordia.kingdoms.board.ui.Displayable;
+import org.concordia.kingdoms.board.ui.Presentable;
 
 import com.google.common.collect.Lists;
 
@@ -18,7 +20,7 @@ public class Board {
 
 	private List<Player> players;
 
-	private Displayable displayable;
+	private Presentable presentable;
 
 	public static final int MAX_ROWS = 5;
 
@@ -29,16 +31,16 @@ public class Board {
 		this.tileBank = null;
 		this.coinBank = null;
 		this.players = Lists.newArrayList();
-		this.displayable = new Console(entries);
+		this.presentable = new Console(entries);
 	}
 
-	public void putComponent(Component component, int row, int column)
-			throws Exception {
+	public void putComponent(Component component, int row, int column) {
 		if (!isValidPosition(row, column)) {
-			throw new Exception("Invalid positon(" + row + "," + column + ")");
+			throw new RuntimeException("Invalid positon(" + row + "," + column
+					+ ")");
 		}
 		if (!this.getEntries()[row][column].isEmpty()) {
-			throw new Exception("No Space available");
+			throw new RuntimeException("No Space available");
 		}
 		this.getEntries()[row][column].setComponent(component);
 	}
@@ -49,7 +51,7 @@ public class Board {
 	}
 
 	public void display() {
-		this.displayable.display();
+		this.presentable.present();
 	}
 
 	public Entry[][] getEntries() {

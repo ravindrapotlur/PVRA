@@ -8,11 +8,11 @@ public class Castle implements Component, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer rank;
+	private int rank;
 
 	private Color color;
 
-	public Castle(final Integer rank, Color color) {
+	private Castle(final int rank, Color color) {
 		this.rank = rank;
 		this.color = color;
 	}
@@ -26,11 +26,15 @@ public class Castle implements Component, Serializable {
 	}
 
 	public Integer getValue() {
-		return rank;
+		return this.rank;
 	}
 
 	public String getName() {
 		return "C(" + color.getCode() + ")";
+	}
+
+	public static Castle newCastle(final int rank, Color color) {
+		return new Castle(rank, color);
 	}
 
 }

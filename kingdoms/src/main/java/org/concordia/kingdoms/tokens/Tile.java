@@ -14,7 +14,7 @@ public class Tile implements Component, Serializable {
 
 	private Integer value;
 
-	public Tile(TileType type, String name, Integer value) {
+	private Tile(TileType type, String name, Integer value) {
 		this.type = type;
 		this.name = name;
 		this.value = value;
@@ -32,12 +32,12 @@ public class Tile implements Component, Serializable {
 		return this.type;
 	}
 
-	public static Tile newTile(TileType type, String name, int value) {
-		return new Tile(type, name, value);
-	}
-
 	@Override
 	public String toString() {
 		return this.name + "(" + this.value + ")";
+	}
+
+	public static Tile newTile(TileType type, String name, Integer value) {
+		return new Tile(type, name, value);
 	}
 }

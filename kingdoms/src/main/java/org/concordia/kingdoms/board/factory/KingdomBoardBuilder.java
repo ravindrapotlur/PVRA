@@ -1,15 +1,23 @@
 package org.concordia.kingdoms.board.factory;
 
 import java.util.List;
+import java.util.Map;
 
+import org.concordia.kingdoms.GameBox;
 import org.concordia.kingdoms.Player;
 import org.concordia.kingdoms.board.Board;
-import org.concordia.kingdoms.board.CoinBank;
 import org.concordia.kingdoms.board.Entry;
-import org.concordia.kingdoms.board.TileBank;
+import org.concordia.kingdoms.tokens.Coin;
+import org.concordia.kingdoms.tokens.CoinType;
 import org.concordia.kingdoms.tokens.Color;
 
+import com.google.common.collect.Maps;
+
 public class KingdomBoardBuilder implements BoardBuilder {
+
+	private KingdomBoardBuilder() {
+		//
+	}
 
 	public Entry[][] buildEmptyBoard(int rows, int columns) {
 		final Entry[][] entries = new Entry[rows][columns];
@@ -26,19 +34,11 @@ public class KingdomBoardBuilder implements BoardBuilder {
 	}
 
 	public TileBank buildTileBank() {
-		return TileBank.newTileBank();
+		return TileBank.getTileBank();
 	}
 
 	public CoinBank buildCoinBank() {
-		return CoinBank.newCoinBank();
-	}
-
-	public void buildTiles() {
-		
-	}
-
-	public void buildCastles() {
-		
+		return CoinBank.getCoinBank();
 	}
 
 	public Board buildBoard(final int rows, final int columns,
@@ -47,7 +47,20 @@ public class KingdomBoardBuilder implements BoardBuilder {
 		board.setTileBank(this.buildTileBank());
 		board.setCoinBank(this.buildCoinBank());
 		board.setPlayers(players);
+		initPlayers(board, players);
 		return board;
+	}
+
+	private void initPlayers(Board board, final List<Player> players) {
+		// each player must have the board to put component
+		for (final Player player : players) {
+			player.setBoard(board);
+			final Map<CoinType, List<Coin>> coinMap = Maps.newHashMap();
+			coinMap.put(CoinType.GOLD_50,
+					GameBox.getGameBox().takeCoins(CoinType.GOLD_50, 1));
+			player.setCoins(coinMap);
+		}
+
 	}
 
 	public Player buildPlayer(final String name, final Color[] chosenColors) {
@@ -56,6 +69,10 @@ public class KingdomBoardBuilder implements BoardBuilder {
 
 	public Player buildPlayer(final String name, final Color chosenColor) {
 		return Player.newPlayer(name, new Color[] { chosenColor });
+	}
+
+	public static KingdomBoardBuilder newKingdomBoardBuilder() {
+		return new KingdomBoardBuilder();
 	}
 
 }

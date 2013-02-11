@@ -1,17 +1,18 @@
 package org.concordia.kingdoms.tokens;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+
 public class Coin {
 
 	private CoinType type;
 
 	private int value;
 
-	private int count;
-
-	private Coin(CoinType type, int value, int count) {
+	private Coin(CoinType type, int value) {
 		this.type = type;
 		this.value = value;
-		this.count = count;
 	}
 
 	public int getValue() {
@@ -22,16 +23,16 @@ public class Coin {
 		return this.type;
 	}
 
-	public int getCount() {
-		return count;
+	public static List<Coin> newCoins(CoinType type, int size) {
+		final List<Coin> coins = Lists.newArrayList();
+		for (int i = 0; i < size; i++) {
+			coins.add(Coin.newCoin(type));
+		}
+		return coins;
 	}
 
-	public static Coin newCoin(CoinType type, int count) {
-		return new Coin(type, type.getValue(), count);
-	}
-
-	public void setCount(int count) {
-		this.count = count;
+	public static Coin newCoin(CoinType type) {
+		return new Coin(type, type.getValue());
 	}
 
 }
