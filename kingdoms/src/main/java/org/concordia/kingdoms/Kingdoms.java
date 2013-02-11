@@ -99,7 +99,7 @@ public class Kingdoms implements Game, Presentable {
 				new Color[] { Color.RED });
 		players.add(player1);
 		players.add(player2);
-		player1.putCastle(player1.removeCastle(1, Color.BLUE), 0, 0);
+		// player1.putCastle(player1.removeCastle(1, Color.BLUE), 0, 0);
 		kingdoms.start(players);
 		kingdoms.present();
 	}

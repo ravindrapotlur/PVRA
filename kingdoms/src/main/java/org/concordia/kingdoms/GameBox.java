@@ -173,6 +173,11 @@ public class GameBox {
 
 	public void assignCastles(Player player, int totalPlayers) {
 		final Color[] playerColors = player.getChosenColors();
+		for (final Color color : playerColors) {
+			for (int rank = 2; rank <= 4; rank++) {
+				
+			}
+		}
 	}
 
 	public List<Tile> getTiles(TileType type) {

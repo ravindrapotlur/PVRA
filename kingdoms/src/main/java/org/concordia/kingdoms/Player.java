@@ -11,7 +11,6 @@ import org.concordia.kingdoms.tokens.Color;
 import org.concordia.kingdoms.tokens.Tile;
 import org.concordia.kingdoms.tokens.TileType;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class Player {
